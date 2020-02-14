@@ -8,16 +8,10 @@ namespace LemonadeStand_3DayStarter
 {
     class Wallet
     {
-        private double money;
 
         // property - TBD
-        public double Money
-        {
-            get
-            {
-                return money;
-            }
-        }
+        public double Money{ get { return money; } }
+        double money;
 
         public Wallet()
         {
@@ -26,7 +20,8 @@ namespace LemonadeStand_3DayStarter
 
         public void PayMoneyForItems(double transactionAmount)
         {
-            money -= transactionAmount;
+            money -= transactionAmount;  
         }
+        
     }
 }

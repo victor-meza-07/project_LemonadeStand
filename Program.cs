@@ -10,7 +10,8 @@ namespace LemonadeStand_3DayStarter
     {
         static void Main(string[] args)
         {
-            Game juego = new Game();
+            UserInterface.GetNumberOfItems(Console.ReadLine());
+            Console.Read();
         }
     }
 }

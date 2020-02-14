@@ -60,6 +60,7 @@
     <Compile Include="SugarCube.cs" />
     <Compile Include="UserInterface.cs" />
     <Compile Include="Wallet.cs" />
+    <Compile Include="WeatheCondition.cs" />
     <Compile Include="Weather.cs" />
   </ItemGroup>
   <ItemGroup>

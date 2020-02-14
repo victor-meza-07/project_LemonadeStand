@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand_3DayStarter
 {
-    class Pitcher
+    class WeatheCondition
     {
-        public int cupsLeftInPitcher { get; set; }
-        public Pitcher()
+        public string ConditionTyppe { get; set; }
+        public int Id { get; set; }
+        public WeatheCondition()
         {
 
         }
