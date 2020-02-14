@@ -9,14 +9,15 @@ namespace LemonadeStand_3DayStarter
     class Store
     {
         // member variables (HAS A)
-        private double pricePerLemon;
-        private double pricePerSugarCube;
-        private double pricePerIceCube;
-        private double pricePerCup;
+        private double pricePerLemon { get; set; }
+        private double pricePerSugarCube { get; set; }
+        private double pricePerIceCube { get; set; }
+        private double pricePerCup { get; set; }
 
         // constructor (SPAWNER)
         public Store()
         {
+            
             pricePerLemon = .5;
             pricePerSugarCube = .1;
             pricePerIceCube = .01;
