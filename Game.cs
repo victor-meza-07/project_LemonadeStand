@@ -11,6 +11,7 @@ namespace LemonadeStand_3DayStarter
         Player player;
         public List<Day> week;//formally known as days
         int currentDay;
+        int GameDifficulty { get; set; }
         Random random;
         public Game()
         {
@@ -18,10 +19,37 @@ namespace LemonadeStand_3DayStarter
             week = new List<Day>();
             AddWeekDays();
         }
-
-        public void amethodthatdoesstuff() 
+        private void Start() 
         {
-            //DO THINGS!
+            FlushValues();
+            SetDifficulty();
+            setPlayerName();
+            SetStoreName();
+        }
+
+        private void DecideWhatGameToLaunch() 
+        {
+            if () { }
+            else if () { }
+            else if () { }
+        }
+
+
+
+
+
+        private void SetDifficulty() 
+        {
+            this.GameDifficulty = UserInterface.DisplayDifficultyPrompt();
+        }
+        private void SetStoreName() 
+        {
+            player.mylemmonadeStand.standname = UserInterface.DisplayStoreNamePrompt();
+        }
+        private void setPlayerName() 
+        {
+            player = new Player();
+            player.name = UserInterface.DisplayPlayerNamePrompt();
         }
         private void FlushValues() 
         {

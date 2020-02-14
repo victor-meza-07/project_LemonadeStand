@@ -37,5 +37,60 @@ namespace LemonadeStand_3DayStarter
                 }
             }
         }
+        public static string DisplayPlayerNamePrompt() 
+        {
+            bool userInputwasValid = false;
+            string playername = null;
+            while (!userInputwasValid) 
+            {
+                Console.WriteLine("Please Enter A Name For Yourself");
+                playername = Console.ReadLine();
+                if ((playername != null) && (playername.Length != 0))
+                {
+                    Console.WriteLine($"Thanks {playername}");
+                    userInputwasValid = true;
+                }
+                else 
+                {
+                    Console.WriteLine("No, Really; we need a name for you");
+                }
+            }
+            return playername;
+        }
+        public static string DisplayStoreNamePrompt()
+        {
+            bool userInputwasValid = false;
+            string storename = null;
+            while (!userInputwasValid)
+            {
+                Console.WriteLine("Please Enter A Name For Your Store");
+                storename = Console.ReadLine();
+                if ((storename != null) && (storename.Length != 0))
+                {
+                    Console.WriteLine($"Thanks {storename}");
+                    userInputwasValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("No, Really; we need a name for your store");
+                }
+            }
+            return storename;
+        }
+        public static int DisplayDifficultyPrompt() 
+        {
+            int difficulty = 0;
+            bool validuserinput = false;
+            while (!validuserinput)
+            {
+                Console.WriteLine($"Choose a difficulty!");
+                Console.WriteLine("1. Easy");
+                Console.WriteLine("2. Medium");
+                Console.WriteLine("3. Hard");
+                validuserinput = Int32.TryParse( Console.ReadLine(), out difficulty);
+                if ((difficulty < 1) || (difficulty > 3)) { validuserinput = false; Console.WriteLine("Seriously, type an int on the screen!"); }
+            }
+            return difficulty;
+        }
     }
 }

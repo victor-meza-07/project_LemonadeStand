@@ -9,6 +9,8 @@ namespace LemonadeStand_3DayStarter
     class Pitcher
     {
         public int cupsLeftInPitcher { get; set; }
+        public string PitcherName { get; set; }
+        public Recipe theRecepieIContain { get; set; }
         public Pitcher()
         {
 

@@ -12,6 +12,7 @@ namespace LemonadeStand_3DayStarter
         {
             Game game = new Game();
             UserInterface.DisplayWeekInformation(game.week);
+            UserInterface.DisplayPlayerNamePrompt();
             Console.Read();
         }
     }

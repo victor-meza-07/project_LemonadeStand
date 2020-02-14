@@ -12,13 +12,17 @@ namespace LemonadeStand_3DayStarter
         public Inventory inventory;
         public Wallet wallet;
         public Recipe recipe;
-        public Pitcher pitcher;
+        public List<Pitcher> listofPitchers;
+        public LemmonadeStand mylemmonadeStand;
+        public string name { get; set; }
 
         // constructor (SPAWNER)
         public Player()
         {
+            listofPitchers = new List<Pitcher>();
             inventory = new Inventory();
             wallet = new Wallet();
+            mylemmonadeStand = new LemmonadeStand();
         }
 
         // member methods (CAN DO)

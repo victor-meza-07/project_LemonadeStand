@@ -13,6 +13,7 @@ namespace LemonadeStand_3DayStarter
         public double pricePerSugarCube { get; set; }
         public double pricePerIceCube { get; set; }
         public double pricePerCup { get; set; }
+        
 
         // constructor (SPAWNER)
         public Store()
