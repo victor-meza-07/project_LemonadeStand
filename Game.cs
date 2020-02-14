@@ -9,12 +9,14 @@ namespace LemonadeStand_3DayStarter
     class Game
     {
         Player player;
-        List<Day> week;//formally known as days
+        public List<Day> week;//formally known as days
         int currentDay;
         Random random;
         public Game()
         {
             random = new Random();
+            week = new List<Day>();
+            AddWeekDays();
         }
 
         public void amethodthatdoesstuff() 
@@ -28,13 +30,13 @@ namespace LemonadeStand_3DayStarter
         }
         private void AddWeekDays() 
         {
-            week.Add(new Day(random) { name = "Monday", ID = 0});
-            week.Add(new Day(random) { name = "Tuesday", ID = 1 });
-            week.Add(new Day(random) { name = "Wednesday", ID = 2 });
-            week.Add(new Day(random) { name = "Thursday", ID = 3 });
-            week.Add(new Day(random) { name = "Friday", ID = 4 });
-            week.Add(new Day(random) { name = "Saturday", ID = 5 });
-            week.Add(new Day(random) { name = "Sunday", ID = 6 });
+            week.Add(new Day(random) { name = "Monday"});
+            week.Add(new Day(random) { name = "Tuesday"});
+            week.Add(new Day(random) { name = "Wednesday"});
+            week.Add(new Day(random) { name = "Thursday"});
+            week.Add(new Day(random) { name = "Friday"});
+            week.Add(new Day(random) { name = "Saturday"});
+            week.Add(new Day(random) { name = "Sunday"});
         }
     }
 }

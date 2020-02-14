@@ -23,5 +23,19 @@ namespace LemonadeStand_3DayStarter
 
             return quantityOfItem;
         }
+
+        public static void DisplayWeekInformation(List<Day> wekkdays) 
+        {
+            Console.WriteLine("HERE ARE THE WEEKDAYS");
+            foreach (Day day in wekkdays) 
+            {
+                Console.WriteLine($"{day.name}: Customers->{day.dailyCustomers.Count} Temperature->{day.weather.temperature} Condition->{day.weather.condition}");
+                Console.WriteLine("Customers");
+                foreach (Customer customerinfo in day.dailyCustomers) 
+                {
+                    Console.WriteLine($"{customerinfo.name} : {customerinfo.SpendingPower}");
+                }
+            }
+        }
     }
 }

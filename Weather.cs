@@ -13,9 +13,10 @@ namespace LemonadeStand_3DayStarter
         public int temperature { get; set; }
         List<WeatheCondition> weatherConditions;
         Random random;
-        public Weather()
+        public Weather(Random random)
         {
-            random = new Random();
+            this.random = random;
+            weatherConditions = new List<WeatheCondition>();
             AddWeatherConditions();
             SetWeatherCondition();
             SetTemparature();
@@ -71,7 +72,7 @@ namespace LemonadeStand_3DayStarter
             }
             else if (conditionID == 7) 
             {
-                temperature = random.Next(-50, -10);
+                temperature = random.Next(-50, 10);
             }
 
             this.temperature = temperature;

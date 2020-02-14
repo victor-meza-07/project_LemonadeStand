@@ -16,7 +16,7 @@ namespace LemonadeStand_3DayStarter
         private string Name;
         public Customer(Random random)
         {
-            
+            names = new List<string>();
             AddNames();
             SetAName(random);
             SetAspendingPower(random);
@@ -45,11 +45,10 @@ namespace LemonadeStand_3DayStarter
             names.Add("Michelle");
             names.Add("Pamela");
         }
-
-        // I know there must be a way to scan a db programatically and add from there, but i didn;t feel like researching it for this functionality. 
         private void SetAName(Random random) 
         {
-            string name = names[ random.Next(0, names.Count)];
+            Name = names[ random.Next(0, names.Count)];
+
         }
         private void SetAspendingPower(Random random) 
         {

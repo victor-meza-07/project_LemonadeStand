@@ -14,21 +14,63 @@ namespace LemonadeStand_3DayStarter
         public int ID;
         public Day(Random random)
         {
-            weather = new Weather();
+            weather = new Weather(random);
+            dailyCustomers = new List<Customer>();
             addDailyCustomers(random);
+            SetID();
         }
 
         private void addDailyCustomers(Random random) 
         {
+            int chanceOfCustomerSpawn;
             if ((weather.temperature > 60) && (weather.temperature < 80)) 
             {
-                int chanceOfCustomerSpawn = random.Next(10, 20);
+                chanceOfCustomerSpawn = random.Next(10, 20);
                 for (int i = 0; i <chanceOfCustomerSpawn ; i++)
                 {
                     dailyCustomers.Add(new Customer(random));
                 }
             }
-            
+            else if ((weather.temperature > 79) && (weather.temperature < 90))
+            {
+                chanceOfCustomerSpawn = random.Next(15, 30);
+                for (int i = 0; i < chanceOfCustomerSpawn; i++)
+                {
+                    dailyCustomers.Add(new Customer(random));
+                }
+            }
+            else if ((weather.temperature > 89))
+            {
+                chanceOfCustomerSpawn = random.Next(25, 40);
+                for (int i = 0; i < chanceOfCustomerSpawn; i++)
+                {
+                    dailyCustomers.Add(new Customer(random));
+                }
+            }
+            else if ((weather.temperature > 10) && (weather.temperature < 61))
+            {
+                chanceOfCustomerSpawn = random.Next(2, 10);
+                for (int i = 0; i < chanceOfCustomerSpawn; i++)
+                {
+                    dailyCustomers.Add(new Customer(random));
+                }
+            }
+            else if (weather.temperature < 11)
+            {
+                chanceOfCustomerSpawn = random.Next(0, 2);
+                for (int i = 0; i < chanceOfCustomerSpawn; i++)
+                {
+                    dailyCustomers.Add(new Customer(random));
+                }
+            }
+        }
+        private void SetID() 
+        {
+            if ((dailyCustomers.Count >= 10) && (dailyCustomers.Count <20) ) { this.ID = 2; } //Moderate Day
+            else if ((dailyCustomers.Count >= 20) && (dailyCustomers.Count < 30)) { this.ID = 3; } //Good Day
+            else if ((dailyCustomers.Count >= 30) && (dailyCustomers.Count < 41)) { this.ID = 4; }//GREAT DAY
+            else if ((dailyCustomers.Count >= 2) && (dailyCustomers.Count > 10)) { this.ID = 1; }//BAD DAY
+            else if ((dailyCustomers.Count >= 0) && (dailyCustomers.Count < 2)) { this.ID = 0; }//AWFUL DAY
         }
     }
 }
