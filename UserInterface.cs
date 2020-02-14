@@ -8,10 +8,11 @@ namespace LemonadeStand_3DayStarter
 {
     static class UserInterface
     {
-        public static int GetNumberOfItems(string itemsToGet)
+        public static int GetNumberOfItems(Item itemToPurchase)
         {
             bool userInputIsAnInteger = false;
             int quantityOfItem = -1;
+            string itemsToGet = itemToPurchase.name;
 
             while (!userInputIsAnInteger || quantityOfItem < 0)
             {

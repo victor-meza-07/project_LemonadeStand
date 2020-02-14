@@ -24,14 +24,15 @@ namespace LemonadeStand_3DayStarter
             FlushValues();
             SetDifficulty();
             setPlayerName();
-            SetStoreName();
+            AddFirstPlayerStore();
+            SetStoreName(0);
         }
 
         private void DecideWhatGameToLaunch() 
         {
-            if () { }
-            else if () { }
-            else if () { }
+            if (GameDifficulty == 1) { }//RunEasy
+            else if (GameDifficulty == 2) { }//RunMed
+            else if (GameDifficulty == 3) { }//RunHard
         }
 
 
@@ -42,9 +43,9 @@ namespace LemonadeStand_3DayStarter
         {
             this.GameDifficulty = UserInterface.DisplayDifficultyPrompt();
         }
-        private void SetStoreName() 
+        private void SetStoreName(int LemonadeStandListLocation) 
         {
-            player.mylemmonadeStand.standname = UserInterface.DisplayStoreNamePrompt();
+            player.myFranchiseofStands[LemonadeStandListLocation].standname = UserInterface.DisplayStoreNamePrompt();
         }
         private void setPlayerName() 
         {
@@ -65,6 +66,10 @@ namespace LemonadeStand_3DayStarter
             week.Add(new Day(random) { name = "Friday"});
             week.Add(new Day(random) { name = "Saturday"});
             week.Add(new Day(random) { name = "Sunday"});
+        }
+        private void AddFirstPlayerStore() 
+        {
+            player.AddToMyFranchises();
         }
     }
 }

@@ -26,47 +26,61 @@ namespace LemonadeStand_3DayStarter
         }
 
         // member methods (CAN DO)
-        public void SellLemons(Player player)
+        public void SellLemons(Player player, LemmonadeStand FranchiseToAddInventoryTo)
         {
-            int lemonsToPurchase = UserInterface.GetNumberOfItems("lemons");
+            int lemonsToPurchase = UserInterface.GetNumberOfItems(new Lemon());
             double transactionAmount = CalculateTransactionAmount(lemonsToPurchase, pricePerLemon);
             if(player.wallet.Money >= transactionAmount)
             {
                 PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddLemonsToInventory(lemonsToPurchase);
+                for (int i = 0; i < lemonsToPurchase; i++)
+                {
+                    FranchiseToAddInventoryTo.inventoryOfthisStand.lemons.Add(new Lemon());
+                }
+                
             }
         }
 
-        public void SellSugarCubes(Player player)
+        public void SellSugarCubes(Player player, LemmonadeStand FranchiseToAddInventoryTo)
         {
-            int sugarToPurchase = UserInterface.GetNumberOfItems("sugar");
+            int sugarToPurchase = UserInterface.GetNumberOfItems(new SugarCube());
             double transactionAmount = CalculateTransactionAmount(sugarToPurchase, pricePerSugarCube);
             if(player.wallet.Money >= transactionAmount)
             {
                 PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddSugarCubesToInventory(sugarToPurchase);
+                for (int i = 0; i < sugarToPurchase; i++)
+                {
+                    FranchiseToAddInventoryTo.inventoryOfthisStand.lemons.Add(new SugarCube());
+                }
             }
         }
 
-        public void SellIceCubes(Player player)
+        public void SellIceCubes(Player player, LemmonadeStand FranchiseToAddInventoryTo)
         {
-            int iceCubesToPurchase = UserInterface.GetNumberOfItems("ice cubes");
+            int iceCubesToPurchase = UserInterface.GetNumberOfItems(new IceCube());
             double transactionAmount = CalculateTransactionAmount(iceCubesToPurchase, pricePerIceCube);
             if(player.wallet.Money >= transactionAmount)
             {
                 PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddIceCubesToInventory(iceCubesToPurchase);
+                for (int i = 0; i < iceCubesToPurchase; i++)
+                {
+                    FranchiseToAddInventoryTo.inventoryOfthisStand.lemons.Add(new IceCube());
+                }
+                
             }
         }
 
-        public void SellCups(Player player)
+        public void SellCups(Player player, LemmonadeStand FranchiseToAddInventoryTo)
         {
-            int cupsToPurchase = UserInterface.GetNumberOfItems("cups");
+            int cupsToPurchase = UserInterface.GetNumberOfItems(new Cup());
             double transactionAmount = CalculateTransactionAmount(cupsToPurchase, pricePerCup);
             if(player.wallet.Money >= transactionAmount)
             {
                 PerformTransaction(player.wallet, transactionAmount);
-                player.inventory.AddCupsToInventory(cupsToPurchase);
+                for (int i = 0; i < cupsToPurchase; i++)
+                {
+                    FranchiseToAddInventoryTo.inventoryOfthisStand.lemons.Add(new Cup());
+                }
             }
         }
 

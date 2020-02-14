@@ -9,22 +9,23 @@ namespace LemonadeStand_3DayStarter
     class Player
     {
         // member variables (HAS A)
-        public Inventory inventory;
         public Wallet wallet;
-        public Recipe recipe;
-        public List<Pitcher> listofPitchers;
-        public LemmonadeStand mylemmonadeStand;
+        public List<LemmonadeStand> myFranchiseofStands;
         public string name { get; set; }
+        public bool canIAdvertise { get; set; }
 
         // constructor (SPAWNER)
         public Player()
         {
-            listofPitchers = new List<Pitcher>();
-            inventory = new Inventory();
+            
             wallet = new Wallet();
-            mylemmonadeStand = new LemmonadeStand();
+           
         }
 
         // member methods (CAN DO)
+        public void AddToMyFranchises() 
+        {
+            myFranchiseofStands.Add(new LemmonadeStand());
+        }
     }
 }
