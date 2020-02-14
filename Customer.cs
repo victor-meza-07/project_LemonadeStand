@@ -10,6 +10,8 @@ namespace LemonadeStand_3DayStarter
     class Customer
     {
         List<string> names;
+        public int SpendingPower { get { return spendingPower; } }
+        private int spendingPower;
         public string name { get { return Name; } } // formally a property
         private string Name;
         public Customer(Random random)
@@ -17,6 +19,7 @@ namespace LemonadeStand_3DayStarter
             
             AddNames();
             SetAName(random);
+            SetAspendingPower(random);
         }
 
         private void AddNames() 
@@ -44,12 +47,19 @@ namespace LemonadeStand_3DayStarter
         }
 
         // I know there must be a way to scan a db programatically and add from there, but i didn;t feel like researching it for this functionality. 
-        private string SetAName(Random random) 
+        private void SetAName(Random random) 
         {
-            
-            string name = "";
-            name = names[ random.Next(0, names.Count)];
-            return name;
+            string name = names[ random.Next(0, names.Count)];
+        }
+        private void SetAspendingPower(Random random) 
+        {
+            int chance = random.Next(0, 100);
+            if ((chance >= 0) && (chance <= 20)) { this.spendingPower = random.Next(0, 25000); }
+            else if ((chance >= 21) && (chance <= 40)) { this.spendingPower = random.Next(26000, 50000); }
+            else if ((chance >= 41) && (chance <= 60)) { this.spendingPower = random.Next(50000, 79526); }
+            else if ((chance >= 61) && (chance <= 80)) { this.spendingPower = random.Next(79526, 130000); }
+            else if ((chance >= 81) && (chance <= 99)) { this.spendingPower = random.Next(130000, 475116); }
+            else if (chance == 100) { this.spendingPower = random.Next(475000, 1000000000); }
         }
     }
 }

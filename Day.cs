@@ -12,14 +12,23 @@ namespace LemonadeStand_3DayStarter
         public List<Customer> dailyCustomers; //Formally customers
         public string name;
         public int ID;
-        public Day()
+        public Day(Random random)
         {
-            weather = new Weather();   
+            weather = new Weather();
+            addDailyCustomers(random);
         }
 
-        private void addDailyCustomers() 
+        private void addDailyCustomers(Random random) 
         {
-            dailyCustomers.Add(new Customer {name="Paul", })
+            if ((weather.temperature > 60) && (weather.temperature < 80)) 
+            {
+                int chanceOfCustomerSpawn = random.Next(10, 20);
+                for (int i = 0; i <chanceOfCustomerSpawn ; i++)
+                {
+                    dailyCustomers.Add(new Customer(random));
+                }
+            }
+            
         }
     }
 }
