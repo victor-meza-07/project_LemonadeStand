@@ -19,13 +19,17 @@ namespace LemonadeStand_3DayStarter
         {
             
             wallet = new Wallet();
+            myFranchiseofStands = new List<LemmonadeStand>();
            
         }
 
         // member methods (CAN DO)
-        public void AddToMyFranchises() 
+        public void ClearMyValues() 
         {
-            myFranchiseofStands.Add(new LemmonadeStand());
+            wallet = new Wallet();
+            myFranchiseofStands.Clear();
+            name = null;
+            canIAdvertise = false;
         }
     }
 }

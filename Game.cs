@@ -15,27 +15,43 @@ namespace LemonadeStand_3DayStarter
         Random random;
         public Game()
         {
+            player = new Player();
             random = new Random();
             week = new List<Day>();
             AddWeekDays();
         }
-        private void Start() 
+        public void Start() 
         {
             FlushValues();
+            UserInterface.DisplayIntro();
             SetDifficulty();
             setPlayerName();
-            AddFirstPlayerStore();
-            SetStoreName(0);
+            DecideWhatGameToLaunch();
         }
 
         private void DecideWhatGameToLaunch() 
         {
-            if (GameDifficulty == 1) { }//RunEasy
-            else if (GameDifficulty == 2) { }//RunMed
-            else if (GameDifficulty == 3) { }//RunHard
+            if (GameDifficulty == 1) { Console.WriteLine("Doesn't Work"); }//RunEasy
+            else if (GameDifficulty == 2) { MediumLogic(); }//RunMed
+            else if (GameDifficulty == 3) { Console.WriteLine("Doesn't Work"); }//RunHard
         }
 
 
+
+
+        private void MediumLogic() 
+        {
+            AddFirstPlayerStore();
+            SetStoreName(0);
+            UserInterface.DisplayMainMenu();
+            UserInterface.DisplaySupplimentalMenu();
+            string checker;
+            UserInterface.ValidateMainMenuInput(CollectUserInput(), 1, 5, out checker);
+            UserInterface.DecideWhatToDisplayFromMainMenu(checker);
+            Console.Read();
+            
+
+        }
 
 
 
@@ -54,6 +70,7 @@ namespace LemonadeStand_3DayStarter
         }
         private void FlushValues() 
         {
+            player.ClearMyValues();
             week.Clear();
             currentDay = 0;
         }
@@ -69,7 +86,16 @@ namespace LemonadeStand_3DayStarter
         }
         private void AddFirstPlayerStore() 
         {
-            player.AddToMyFranchises();
+            AddPlayerStore();
+        }
+        private void AddPlayerStore() 
+        {
+            player.myFranchiseofStands.Add(new LemmonadeStand());
+        }
+        private string CollectUserInput() 
+        {
+            string userinput = Console.ReadLine();
+            return userinput;
         }
     }
 }
