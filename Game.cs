@@ -18,11 +18,11 @@ namespace LemonadeStand_3DayStarter
             player = new Player();
             random = new Random();
             week = new List<Day>();
-            AddWeekDays();
         }
         public void Start() 
         {
             FlushValues();
+            AddWeekDays();
             UserInterface.DisplayIntro();
             SetDifficulty();
             setPlayerName();
@@ -39,7 +39,7 @@ namespace LemonadeStand_3DayStarter
             UserInterface.DisplaySupplimentalMenu(player);
             string checker;
             UserInterface.ValidateMainMenuInput(CollectUserInput(), 1, 5, player, out checker);
-            UserInterface.DecideWhatToDisplayFromMainMenu(checker, player);
+            UserInterface.DecideWhatToDisplayFromMainMenu(checker, player, week);
             Console.Read();
         }
         private void MediumLogic() 

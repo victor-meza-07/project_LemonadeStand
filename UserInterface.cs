@@ -25,7 +25,25 @@ namespace LemonadeStand_3DayStarter
 
             return quantityOfItem;
         }
-
+        public static void DisplayForecast(List<Day> week) 
+        {
+            Console.Clear();
+            Console.Title = "This Weeks Forecast";
+            foreach (Day day in week) 
+            {
+                Console.Write($"{day.name} |");
+            }
+            Console.WriteLine(" ");
+            foreach (Day day in week) 
+            {
+                Console.Write($"{day.weather.condition} |");
+            }
+            Console.WriteLine(" ");
+            foreach (Day day in week) 
+            {
+                Console.Write($"{day.weather.temperature} |");
+            }
+        }
         public static void DisplayWeekInformation(List<Day> wekkdays) 
         {
             Console.WriteLine("HERE ARE THE WEEKDAYS");
@@ -71,6 +89,7 @@ namespace LemonadeStand_3DayStarter
                 {
                     Console.WriteLine($"{storename} is a pretty good name for a lemonade stand");
                     userInputwasValid = true;
+                    Console.ReadLine();
                 }
                 else
                 {
@@ -175,11 +194,11 @@ namespace LemonadeStand_3DayStarter
 
             return validated;
         }
-        public static void DecideWhatToDisplayFromMainMenu(string userinput, Player player) 
+        public static void DecideWhatToDisplayFromMainMenu(string userinput, Player player, List<Day> week) 
         {
             
             if (userinput == "1") { DisplayPlayerLemonadeStands(player); }//See stnds
-            else if (userinput == "2") { Console.WriteLine($"you chose {userinput}"); }//See Forecast
+            else if (userinput == "2") { DisplayForecast(week); }//See Forecast
             else if (userinput == "3") { Console.WriteLine($"you chose {userinput}"); }//PNL
             else if (userinput == "4") { Console.WriteLine($"you chose {userinput}"); }//Bank Balance
             else if (userinput == "5") { Console.WriteLine($"you chose {userinput}"); }//Open New Location
