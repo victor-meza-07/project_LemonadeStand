@@ -26,31 +26,25 @@ namespace LemonadeStand_3DayStarter
             UserInterface.DisplayIntro();
             SetDifficulty();
             setPlayerName();
-            DecideWhatGameToLaunch();
-        }
-
-        private void DecideWhatGameToLaunch() 
-        {
-            if (GameDifficulty == 1) { Console.WriteLine("Doesn't Work"); }//RunEasy
-            else if (GameDifficulty == 2) { MediumLogic(); }//RunMed
-            else if (GameDifficulty == 3) { Console.WriteLine("Doesn't Work"); }//RunHard
+            MainLoop();
         }
 
 
 
-
-        private void MediumLogic() 
+        private void MainLoop() 
         {
             AddFirstPlayerStore();
             SetStoreName(0);
-            UserInterface.DisplayMainMenu();
-            UserInterface.DisplaySupplimentalMenu();
+            UserInterface.DisplayMainMenu(player);
+            UserInterface.DisplaySupplimentalMenu(player);
             string checker;
-            UserInterface.ValidateMainMenuInput(CollectUserInput(), 1, 5, out checker);
-            UserInterface.DecideWhatToDisplayFromMainMenu(checker);
+            UserInterface.ValidateMainMenuInput(CollectUserInput(), 1, 5, player, out checker);
+            UserInterface.DecideWhatToDisplayFromMainMenu(checker, player);
             Console.Read();
+        }
+        private void MediumLogic() 
+        {
             
-
         }
 
 
