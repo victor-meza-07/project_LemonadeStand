@@ -269,5 +269,9 @@ namespace LemonadeStand_3DayStarter
             Console.WriteLine("3. Transfer Inventory FROM this stand to a DIFFERENT stand");
             Console.WriteLine("4. Close this stand");
         }
+        public static void RecipeCreationMenu() 
+        {
+
+        }
     }
 }
