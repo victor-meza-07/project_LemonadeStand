@@ -18,3 +18,7 @@ Distribution of Acridity in US for Commercial Products
 Acrid Levels of Lemon Juice
 	https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2637791/
 	Citric Acid / juice Amount
+Cooling Factors
+	https://www.khanacademy.org/math/differential-equations/first-order-differential-equations/exponential-models-diff-eq/v/newtons-law-of-cooling
+
+https://opentextbc.ca/physicstestbook2/chapter/temperature-change-and-heat-capacity/

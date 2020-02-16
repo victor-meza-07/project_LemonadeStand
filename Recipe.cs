@@ -20,38 +20,38 @@ namespace LemonadeStand_3DayStarter
 
         public double CoolingFactor { get { return coolingFactor; } }
         private double coolingFactor;
-        
+
         public double CostPerCup;
         public Recipe()
         {
 
         }
 
-        public void AddLemmonstoRecipe(int NumberOfLemonsToAdd) 
+        public void AddLemmonstoRecipe(int NumberOfLemonsToAdd)
         {
             this.amountOfLemons = NumberOfLemonsToAdd;
         }
-        public void AddSugarCubestoRecipe(int NumberofCubestoAdd) 
+        public void AddSugarCubestoRecipe(int NumberofCubestoAdd)
         {
             this.amountOfSugarCubes = NumberofCubestoAdd;
         }
-        public void AddIceCubes(int NumberofIceCubesToAdd) 
+        public void AddIceCubes(int NumberofIceCubesToAdd)
         {
             this.amountOfIceCubes = NumberofIceCubesToAdd;
         }
-        public void AddWatertoRecipe(int waterInmLToAdd) 
+        public void AddWatertoRecipe(int waterInmLToAdd)
         {
             this.amountOfWater = waterInmLToAdd;
         }
-        public void SetpricePerCup(double PriceSetPerCup) 
+        public void SetpricePerCup(double PriceSetPerCup)
         {
             this.pricePerCup = PriceSetPerCup;
         }
-        public void GetCostPerCup(double PricePerLemon, double PricePerSugarCube, double PricePerIceCube, int sizeOfPitcherInCups) 
+        public void GetCostPerCup(double PricePerLemon, double PricePerSugarCube, double PricePerIceCube, int sizeOfPitcherInCups)
         {
             this.CostPerCup = ((PricePerLemon * this.amountOfLemons) + (PricePerSugarCube * this.amountOfSugarCubes) + (PricePerIceCube * this.amountOfIceCubes)) / sizeOfPitcherInCups;
         }
-        public void SetAcridityLevels() 
+        public void SetAcridityLevels()
         {
 
             /*TODO
@@ -59,11 +59,40 @@ namespace LemonadeStand_3DayStarter
              * acridity should drop if more grams of sugar are added. 
              
              */
-            if ((amountOfLemons > 0) && !(amountOfWater > 0) && !(amountOfSugarCubes > 0))
-            { acridLevels = ((amountOfLemons * 14.7) * 1.44); }//ONLY LEMON JUICE ADDED
-            else if ((amountOfLemons > 0) && !(amountOfWater > 0) && (amountOfSugarCubes > 0)) 
-            { acridLevels = (((amountOfLemons * 14.7) * 1.44)) - (amountOfSugarCubes * 4); }//Lemon J and Sugar Only
-            else { }//ALL THREE ADDED
+
+            if (!(amountOfWater > 0))
+            {
+                acridLevels = ((amountOfLemons * 14.7) * 1.44);
+            }//Concentration of citric acid per 14.7ml of lemon juice
+            else if (amountOfWater > 0)
+            {
+                acridLevels = (((amountOfLemons * 14.7) + amountOfWater) * 1.44);
+            }//concentration of citric acid per lemmon juice ml + water ml * 1.44;
+        }
+        public void SetSugarLevels()
+        {
+            sweetnessLevels = amountOfSugarCubes * 4;
+        }
+        public void SetCoolingFactor(Day CurrentDay) 
+        {
+            //Rate of change of Temperature / 1hr = Temperature of Lemonade (Temperature of day (for the liquid) 
+            //Q = mcT Q is rate of of change, m is mass of substance, c is the temperature required to change one kg by 1.0c and T is the change in Temp
+            //Water has a density of 1kg / L or 1g/ml  
+            
+            double InitialtempInCelcius = ((CurrentDay.weather.temperature) - 32) * (5.0/9.0);
+            // So First we calculate how much mass is in the pitcher (14.7ml of juice out of one lemon).
+            double mlInPitcher = amountOfWater + (amountOfLemons * 14.7);
+            //the mass of the ice in g
+            double massOfIce = (amountOfIceCubes * 29.0);
+            //The Calculation for final temperature is the following
+            //Hf = 334J; (heat cap of water) = 4.184J/gc;//-Q2/(Q1mc + Q3mc)
+            double temperatureChangeinCelcius = (massOfIce * 334) / ((mlInPitcher * 4.184) + (massOfIce * 4.184));
+
+
+            //next we need to calculate how much cooling effect that water will have on a human
+
+            double temperatureOfHumaninC = 37.5;
+
         }
 
         //Models
