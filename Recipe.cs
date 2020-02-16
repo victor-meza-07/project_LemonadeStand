@@ -11,8 +11,11 @@ namespace LemonadeStand_3DayStarter
         public int amountOfLemons { get; set; }
         public int amountOfSugarCubes { get; set; }
         public int amountOfIceCubes { get; set; }
+        public int amountOfWater { get; set; }
         public double pricePerCup { get; set; }
-        
+        public double AcridLevels { get { } }//Should only be Gotten never set;
+        public double SweetnessLevels { get { } }
+
         public double CostPerCup;
         public Recipe()
         {
@@ -31,6 +34,10 @@ namespace LemonadeStand_3DayStarter
         {
             this.amountOfIceCubes = NumberofIceCubesToAdd;
         }
+        public void AddWatertoRecipe(int waterInmLToAdd) 
+        {
+            this.amountOfWater = waterInmLToAdd;
+        }
         public void SetpricePerCup(double PriceSetPerCup) 
         {
             this.pricePerCup = PriceSetPerCup;
@@ -39,5 +46,7 @@ namespace LemonadeStand_3DayStarter
         {
             this.CostPerCup = ((PricePerLemon * this.amountOfLemons) + (PricePerSugarCube * this.amountOfSugarCubes) + (PricePerIceCube * this.amountOfIceCubes)) / sizeOfPitcherInCups;
         }
+
+        //Models
     }
 }

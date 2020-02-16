@@ -32,6 +32,18 @@ namespace LemonadeStand_3DayStarter
                 break;
             }
         }
+        
+        //Should have 0 refrences until customers start buying
+        public double getTotalItemizedProffit(double ItemCost, int QuantityofItemBought, double TotalSales)
+        {
+            double proffit = 0;
 
+            proffit = TotalSales - (ItemCost * QuantityofItemBought); // get proffit of item as a group
+            proffit = (proffit / QuantityofItemBought); // get proffit off each inv item.
+
+            return proffit;
+
+        }
+        
     }
 }
