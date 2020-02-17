@@ -13,11 +13,13 @@ namespace LemonadeStand_3DayStarter
         int currentDay;
         int GameDifficulty { get; set; }
         Random random;
+        Store store;
         public Game()
         {
             player = new Player();
             random = new Random();
             week = new List<Day>();
+            store = new Store();
         }
         public void Start() 
         {
@@ -35,16 +37,23 @@ namespace LemonadeStand_3DayStarter
         {
             AddFirstPlayerStore();
             SetStoreName(0);
-            UserInterface.DisplayMainMenu(player);
-            UserInterface.DisplaySupplimentalMenu(player);
-            string checker;
-            UserInterface.ValidateMainMenuInput(CollectUserInput(), 1, 5, player, out checker);
-            UserInterface.DecideWhatToDisplayFromMainMenu(checker, player, week);
+
+            //Loop Start this is the Main Gameplay Loop
+            while (true) 
+            {
+                UserInterface.DisplayMainMenu(player);
+                UserInterface.DisplaySupplimentalMenu(player);
+                string checker;
+                UserInterface.ValidateMainMenuInput(CollectUserInput(), 1, 5, player, out checker);
+                int userChoice;
+                userChoice = UserInterface.DecideWhatToDisplayFromMainMenu(checker, player, week);
+                DecideWhatInterfacetoSendTo(userChoice);
+
+            }
+            //Loop End
+
+
             Console.Read();
-        }
-        private void MediumLogic() 
-        {
-            
         }
 
 
@@ -90,6 +99,52 @@ namespace LemonadeStand_3DayStarter
         {
             string userinput = Console.ReadLine();
             return userinput;
+        }
+        private void DecideWhatInterfacetoSendTo(int userchoice) 
+        {
+            
+            if (userchoice == 1) 
+            { 
+                string playerchoice = UserInterface.DisplayPlayerLemonadeStands(player);
+                LemonadeStandLogicSender(playerchoice);
+            }//See stnds
+            else if (userchoice == 2) { UserInterface.DisplayForecast(week); }//See Forecast
+            else if (userchoice == 3) { Console.WriteLine($"you chose {userchoice}"); }//PNL
+            else if (userchoice == 4) { Console.WriteLine($"you chose {userchoice}"); }//Bank Balance
+            else if (userchoice == 5) { Console.WriteLine($"you chose {userchoice}"); }//Open New Location
+            else if (userchoice == 6) { UserInterface.RecipeBookAction(); }//Recipe Creation
+            else if (userchoice == 7) { Console.WriteLine($"you chose {userchoice}"); }//Change Player Name
+            else if (userchoice == 8) { Console.WriteLine($"you chose {userchoice}"); }//End Game
+            else if (userchoice == 50) { Console.WriteLine($"you chose {userchoice}"); }//Supplimental - M
+            else if (userchoice == 51) { Console.WriteLine($"you chose {userchoice}"); }//Supplimental - s
+            else if (userchoice == 52) { Console.WriteLine($"you chose {userchoice}"); }//Supplimental - d
+            else if (userchoice == 53) { Console.WriteLine($"you chose {userchoice}"); }//Supplimental - e
+        }
+        private void LemonadeStandLogicSender(string subMenuChoice) 
+        {
+            int indexofStand = UserInterface.GetAndSendLemonadeStand(subMenuChoice, player);
+            int actionRequested = UserInterface.DisplayStandSpecificMenu(player, indexofStand);
+
+
+            if (actionRequested == 1) { chnageStandName(indexofStand); } // change stand name
+            else if (actionRequested == 2) { buyStandInventory(indexofStand); }//buy inventory for this stand
+            else if (actionRequested == 3) { }//Transfer
+            else if (actionRequested == 4) { UserInterface.DisplayStandInventoryLevels(player.myFranchiseofStands[indexofStand]); Console.ReadLine(); }//Check
+            else if (actionRequested == 5) { }//transefer inventory
+            else if (actionRequested == 6) { }//transefer inventory
+
+        }
+        private void chnageStandName(int indexOfStand) 
+        {
+            string newName = UserInterface.DisplayStoreNamePrompt();
+            player.myFranchiseofStands[indexOfStand].standname = newName;
+        }
+        private void buyStandInventory(int indexOfStand) 
+        {
+            int userchoice = 0;
+            userchoice =  UserInterface.StoreMenu();
+            store.GetWhatToSell(userchoice, player, indexOfStand);
+
         }
     }
 }

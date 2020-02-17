@@ -11,6 +11,7 @@ namespace LemonadeStand_3DayStarter
         // member variables (HAS A)
         public Wallet wallet;
         public List<LemmonadeStand> myFranchiseofStands;
+        public List<Recipe> myReceipeBook;
         public string name { get; set; }
         public bool canIAdvertise { get; set; }
 
@@ -20,6 +21,7 @@ namespace LemonadeStand_3DayStarter
             
             wallet = new Wallet();
             myFranchiseofStands = new List<LemmonadeStand>();
+            myReceipeBook = new List<Recipe>();
            
         }
 
@@ -28,6 +30,7 @@ namespace LemonadeStand_3DayStarter
         {
             wallet = new Wallet();
             myFranchiseofStands.Clear();
+            myReceipeBook.Clear();
             name = null;
             canIAdvertise = false;
         }

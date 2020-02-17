@@ -16,6 +16,7 @@ namespace LemonadeStand_3DayStarter
         {
             listOfPitchers = new List<Pitcher>();
             inventoryOfthisStand = new Inventory();
+            inventoryOfthisStand = new Inventory();
         }
         public void addToMyListOfPitchers(string pitcherName, Recipe recipeThePitcherWillHold, int SizeOfPitcherInCups) 
         {
@@ -34,7 +35,7 @@ namespace LemonadeStand_3DayStarter
         }
         
         //Should have 0 refrences until customers start buying
-        public double getTotalItemizedProffit(double ItemCost, int QuantityofItemBought, double TotalSales)
+        public double getTotalItemizedProffit(double ItemCost, int QuantityofItemBought, double TotalSales, int numBerOfDaysSinceGameStarted)
         {
             double proffit = 0;
 

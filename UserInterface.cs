@@ -132,14 +132,13 @@ namespace LemonadeStand_3DayStarter
             Console.WriteLine("3. Proffit and Loss Analysis");
             Console.WriteLine("4. Check Bank Account");
             Console.WriteLine("5. Open a new Location");
-            Console.WriteLine("6. Recipe Maker");
+            Console.WriteLine("6. Recipe Book");
             Console.WriteLine("7. Change Your Name");
             Console.WriteLine("8. End Game");
             if (player.canIAdvertise == true) 
             {
                 Console.WriteLine("M. Start a marketing campaign");
             }
-            
 
         }
         public static void DisplaySupplimentalMenu(Player player) 
@@ -194,21 +193,23 @@ namespace LemonadeStand_3DayStarter
 
             return validated;
         }
-        public static void DecideWhatToDisplayFromMainMenu(string userinput, Player player, List<Day> week) 
+        public static int DecideWhatToDisplayFromMainMenu(string userinput, Player player, List<Day> week) 
         {
-            
-            if (userinput == "1") { DisplayPlayerLemonadeStands(player); }//See stnds
-            else if (userinput == "2") { DisplayForecast(week); }//See Forecast
-            else if (userinput == "3") { Console.WriteLine($"you chose {userinput}"); }//PNL
-            else if (userinput == "4") { Console.WriteLine($"you chose {userinput}"); }//Bank Balance
-            else if (userinput == "5") { Console.WriteLine($"you chose {userinput}"); }//Open New Location
-            else if (userinput == "6") { Console.WriteLine($"you chose {userinput}"); }//Recipe Creation
-            else if (userinput == "7") { Console.WriteLine($"you chose {userinput}"); }//Change Player Name
-            else if (userinput == "8") { Console.WriteLine($"you chose {userinput}"); }//End Game
-            else if (userinput == "M") { Console.WriteLine($"you chose {userinput}"); }//Marketing Menu
-            else if (userinput == "s") { Console.WriteLine($"you chose {userinput}"); }//Access the Store
-            else if (userinput == "d") { Console.WriteLine($"you chose {userinput}"); }//Start a new Day
-            else if (userinput == "e") { Console.WriteLine($"you chose {userinput}"); }//Possible Events in Game
+            int user = 0;
+            if (userinput == "1") {user = Convert.ToInt32(userinput); }//See stnds
+            else if (userinput == "2") { user = Convert.ToInt32(userinput); }//See Forecast
+            else if (userinput == "3") { user = Convert.ToInt32(userinput); }//PNL
+            else if (userinput == "4") { user = Convert.ToInt32(userinput); }//Bank Balance
+            else if (userinput == "5") { user = Convert.ToInt32(userinput); }//Open New Location
+            else if (userinput == "6") { user = Convert.ToInt32(userinput); }//Recipe Creation
+            else if (userinput == "7") { user = Convert.ToInt32(userinput); }//Change Player Name
+            else if (userinput == "8") { user = Convert.ToInt32(userinput); }//End Game
+            else if (userinput == "M") { user = 50; }//Marketing Menu
+            else if (userinput == "s") { user = 51; }//Access the Store
+            else if (userinput == "d") { user = 52; }//Start a new Day
+            else if (userinput == "e") { user = 53; }//Possible Events in Game
+
+            return user;
         }
         public static bool GenericValidationTool(string userin, int minChoice, int maxChoice, out int validatedoutput) 
         {
@@ -231,7 +232,30 @@ namespace LemonadeStand_3DayStarter
 
             return hasvalidated;
         }
+        public static int StoreMenu() 
+        {
+            int playerchoice = 0;
+            bool val = false;
+            Console.Clear();
+            Console.Title = "Store Main Menu";
 
+            Console.WriteLine("Hello There! Welcome to the General Store");
+            Console.WriteLine("What would you like to buy?");
+            Console.WriteLine(" ");
+            Console.WriteLine("1. Pitchers");
+            Console.WriteLine("2. Lemons");
+            Console.WriteLine("3. Sugar Cubes");
+            Console.WriteLine("4. Cups");
+            Console.WriteLine("5. Ice");
+
+            while ((!val) && (playerchoice == 0)) 
+            {
+                val = GenericValidationTool(Console.ReadLine(), 1, 5, out playerchoice);
+            }
+
+            return playerchoice;
+
+        }
         public static int GetAndSendLemonadeStand(string userchoice, Player player) 
         {
             bool hasvalidated = false;
@@ -243,7 +267,7 @@ namespace LemonadeStand_3DayStarter
             }
             return indexOfStore;
         }
-        public static void DisplayPlayerLemonadeStands(Player player) 
+        public static string DisplayPlayerLemonadeStands(Player player) 
         {
 
             Console.Clear();
@@ -256,22 +280,44 @@ namespace LemonadeStand_3DayStarter
                 counter++;
             }
             string userin = Console.ReadLine();
-            int indexofStand = GetAndSendLemonadeStand(userin, player);
-            DisplayStandSpecificMenu(player, indexofStand);
+            return userin;
         }
-        public static void DisplayStandSpecificMenu(Player player, int iOFLemonadeStand) 
+        public static int DisplayStandSpecificMenu(Player player, int iOFLemonadeStand) 
         {
+            int playerchoice = 0;
+            bool val = false;
             Console.Clear();
-            Console.Beep();
             Console.Title = $"Menu For {player.myFranchiseofStands[iOFLemonadeStand].standname}";
             Console.WriteLine("1. Change Stand Name");
             Console.WriteLine("2. Buy Inventory for this Stand");
             Console.WriteLine("3. Transfer Inventory FROM this stand to a DIFFERENT stand");
-            Console.WriteLine("4. Close this stand");
-        }
-        public static void RecipeCreationMenu() 
-        {
+            Console.WriteLine("4. Check Inventory Levels of This Stand");
+            Console.WriteLine("5. Add A Pitcher of Lemonade");
+            Console.WriteLine("6. Edit A Pitcher ");
+            Console.WriteLine("6. Close this stand");
 
+            while (!val) 
+            {
+                val = GenericValidationTool(Console.ReadLine(), 1, 6, out playerchoice);
+            }
+
+            return playerchoice;
         }
+        public static void DisplayStandInventoryLevels(LemmonadeStand Stand) 
+        {
+            Console.WriteLine("Cups | Lemons | Ice Cubes | Sugar Cubes | Pitchers");
+            Console.WriteLine($"{Stand.inventoryOfthisStand.cups.Count} | {Stand.inventoryOfthisStand.lemons.Count} | " +
+                $"{Stand.inventoryOfthisStand.iceCubes.Count} | {Stand.inventoryOfthisStand.sugarCubes.Count} | {Stand.listOfPitchers.Count}");
+        }
+        
+        public static void RecipeCreationMenu(Player player) 
+        {
+            Console.Clear();
+            Console.Title = $"{player.name}'s Recipe Book";
+            Console.WriteLine("1. Create A Recipe");
+            Console.WriteLine("2. Delete A Recipe");
+            Console.WriteLine("3. Modify A Recipe");
+        }
+        public static void RecipeBookAction() { }
     }
 }
