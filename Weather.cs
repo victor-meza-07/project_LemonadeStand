@@ -66,11 +66,11 @@ namespace LemonadeStand_3DayStarter
             {
                 temperature = random.Next(50, 74);
             }
-            else if ((conditionID >= 6) && (conditionID <= 8))
+            else if ((conditionID == 6) || (conditionID == 8))
             {
                 temperature = random.Next(32, 50);
             }
-            else if (conditionID == 7) 
+            if (conditionID == 7) 
             {
                 temperature = random.Next(-50, 10);
             }

@@ -11,8 +11,8 @@ namespace LemonadeStand_3DayStarter
         public int amountOfLemons { get; set; }
         public int amountOfSugarCubes { get; set; }
         public int amountOfIceCubes { get; set; }
-        public double amountOfWater { get { return AmountOfWater; } }
-        private double AmountOfWater;
+        public double amountOfWater { get; set; }
+        
         public double pricePerCup { get; set; }
         public double AcridLevels { get { return acridLevels; } }//Should only be Gotten never set;
         private double acridLevels;
@@ -23,10 +23,15 @@ namespace LemonadeStand_3DayStarter
         public double CoolingFactor { get { return coolingFactor; } }
         private double coolingFactor;
 
+        public string Name { get; set; }
+
         public double CostPerCup;
         public Recipe()
         {
-
+            amountOfLemons = 0;
+            amountOfSugarCubes = 0;
+            amountOfWater = 0;
+            amountOfIceCubes = 0;
         }
 
         public void AddLemmonstoRecipe(int NumberOfLemonsToAdd)
@@ -43,7 +48,7 @@ namespace LemonadeStand_3DayStarter
         }
         public void AddWatertoRecipe(int waterInmLToAdd)
         {
-            this.AmountOfWater = (waterInmLToAdd / 237); // takes ml converts to cups;
+            this.amountOfWater = (waterInmLToAdd / 237); // takes ml converts to cups;
         }
         public void SetpricePerCup(double PriceSetPerCup)
         {
@@ -75,7 +80,7 @@ namespace LemonadeStand_3DayStarter
             //Water has a density of 1kg / L or 1g/ml  
             double InitialtempInCelcius = ((CurrentDay.weather.temperature) - 32) * (5.0/9.0);
             // So First we calculate how much mass is in the pitcher (14.7ml of juice out of one lemon).
-            double mlInPitcher = AmountOfWater + (amountOfLemons * 14.7);
+            double mlInPitcher = amountOfWater + (amountOfLemons * 14.7);
             //the mass of the ice in g
             double massOfIce = (amountOfIceCubes * 29.0);
             //The Calculation for final temperature is the following
@@ -100,7 +105,7 @@ namespace LemonadeStand_3DayStarter
         }
         public void SetLemonadeContentLevels() 
         {
-            lemonadeContentLevels = ((amountOfLemons * 14.7) / 237) + AmountOfWater; 
+            lemonadeContentLevels = ((amountOfLemons * 14.7) / 237) + amountOfWater; 
         }
 
         //Models

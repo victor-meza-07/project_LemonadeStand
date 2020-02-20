@@ -122,6 +122,12 @@ namespace LemonadeStand_3DayStarter
             Console.WriteLine("You can Always access a list of possible events in your menu.");
             Console.WriteLine("Remeber to Have fun!");
         }
+        public static void DisplayBankBalance(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine("My Cash");
+            Console.WriteLine($"{player.wallet.Money}");
+        }
         public static void DisplayMainMenu(Player player) 
         {
             Console.Clear();
@@ -263,7 +269,6 @@ namespace LemonadeStand_3DayStarter
             while ((!hasvalidated) && (indexOfStore == -1)) 
             {
                 hasvalidated = GenericValidationTool(userchoice, 0, player.myFranchiseofStands.Count, out indexOfStore);
-                userchoice = Console.ReadLine();
             }
             return indexOfStore;
         }
@@ -294,11 +299,11 @@ namespace LemonadeStand_3DayStarter
             Console.WriteLine("4. Check Inventory Levels of This Stand");
             Console.WriteLine("5. Add A Pitcher of Lemonade");
             Console.WriteLine("6. Edit A Pitcher ");
-            Console.WriteLine("6. Close this stand");
+            Console.WriteLine("7. Close this stand");
 
             while (!val) 
             {
-                val = GenericValidationTool(Console.ReadLine(), 1, 6, out playerchoice);
+                val = GenericValidationTool(Console.ReadLine(), 1, 7, out playerchoice);
             }
 
             return playerchoice;
@@ -309,15 +314,109 @@ namespace LemonadeStand_3DayStarter
             Console.WriteLine($"{Stand.inventoryOfthisStand.cups.Count} | {Stand.inventoryOfthisStand.lemons.Count} | " +
                 $"{Stand.inventoryOfthisStand.iceCubes.Count} | {Stand.inventoryOfthisStand.sugarCubes.Count} | {Stand.listOfPitchers.Count}");
         }
-        
-        public static void RecipeCreationMenu(Player player) 
+
+        public static int CloseStandPormpt(Player player, int indexOfStand) 
         {
+            bool val = false;
+            int playerchoice = 0;
+            Console.WriteLine($"Are you sure you want to PERMANENTLY CLOSE {player.myFranchiseofStands[indexOfStand].standname}?");
+            Console.WriteLine(" ");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No");
+            while ((!val) && (playerchoice == 0)) 
+            {
+                val = GenericValidationTool(Console.ReadLine(), 1, 2, out playerchoice);
+            }
+
+            return playerchoice;
+        }
+        public static void DisplayListOfRecipes(Player player) 
+        {
+            if (player.myReceipeBook.Count > 0) 
+            {
+                int counter = 0;
+                Console.WriteLine("Your List of Recipes");
+                foreach (Recipe recipe in player.myReceipeBook) 
+                {
+                    Console.WriteLine($"{counter}.{player.myReceipeBook[counter].Name}");
+                    counter++;
+                }
+            }
+            else 
+            {
+                Console.WriteLine("Hey Bud, you have no Recipes we'll Send you to the creation menu");
+                System.Threading.Thread.Sleep(1000);
+                RecipeCreationMenu(player);
+
+            }
+        }
+        public static int RecipeCreationMenu(Player player) 
+        {
+            int userchoice = 0;
             Console.Clear();
             Console.Title = $"{player.name}'s Recipe Book";
             Console.WriteLine("1. Create A Recipe");
             Console.WriteLine("2. Delete A Recipe");
             Console.WriteLine("3. Modify A Recipe");
+            Console.WriteLine($"Total Recipes:{player.myReceipeBook.Count}");
+
+            bool val = false;
+            while (!val) 
+            {
+                val = GenericValidationTool(Console.ReadLine(), 1, 3, out userchoice);
+            }
+            
+            return userchoice;
         }
-        public static void RecipeBookAction() { }
+
+        public static int GetWhatToModifyFromRecipe() 
+        {
+            int choice = 0;
+            bool val = false;
+            Console.WriteLine("1. Edit Lemons");
+            Console.WriteLine("2. Edit Sugar Cubes");
+            Console.WriteLine("3. Edit Water Level");
+            Console.WriteLine("4. Edit Ice Cubes");
+            Console.WriteLine("5. Edit Name");
+
+            while (!val) 
+            {
+                val = GenericValidationTool(Console.ReadLine(), 1, 5, out choice);
+            }
+
+            return choice; 
+        }
+
+        public static string GetUnvalStringFromUser(string PormptMessage) 
+        {
+            string userchoice = "";
+            Console.WriteLine(PormptMessage);
+            userchoice = Console.ReadLine();
+            return userchoice;
+        }
+        public static int GetArecipeIndexFromPLayer(Player player) 
+        {
+            int recipeIndex = -1;
+            bool validIndex = false;
+            Console.WriteLine("Please Select A recipe!");
+            UserInterface.DisplayListOfRecipes(player);
+            while ((!validIndex)) 
+            {
+                validIndex = GenericValidationTool(Console.ReadLine(), 0, player.myReceipeBook.Count, out recipeIndex);
+            }
+
+            return recipeIndex;
+        }
+        public static void DisplayCurrentRecipe(Player player, int indexofRecipe) 
+        {
+            Console.WriteLine("Current Recipe");
+            Console.WriteLine($"Lemons: {player.myReceipeBook[indexofRecipe].amountOfLemons}");
+            Console.WriteLine($"Sugar Cubes: {player.myReceipeBook[indexofRecipe].amountOfSugarCubes}");
+            Console.WriteLine($"Water: {player.myReceipeBook[indexofRecipe].amountOfWater}");
+            Console.WriteLine($"Ice Cubes: {player.myReceipeBook[indexofRecipe].amountOfIceCubes}");
+        }
+
+
+        
     }
 }
