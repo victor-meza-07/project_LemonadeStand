@@ -79,13 +79,13 @@ namespace LemonadeStand_3DayStarter
         }
         private void AddWeekDays() 
         {
-            week.Add(new Day(random) { name = "Monday"});
-            week.Add(new Day(random) { name = "Tuesday"});
-            week.Add(new Day(random) { name = "Wednesday"});
-            week.Add(new Day(random) { name = "Thursday"});
-            week.Add(new Day(random) { name = "Friday"});
-            week.Add(new Day(random) { name = "Saturday"});
-            week.Add(new Day(random) { name = "Sunday"});
+            week.Add(new Day(random, week) { name = "Monday"});
+            week.Add(new Day(random, week) { name = "Tuesday"});
+            week.Add(new Day(random, week) { name = "Wednesday"});
+            week.Add(new Day(random, week) { name = "Thursday"});
+            week.Add(new Day(random, week) { name = "Friday"});
+            week.Add(new Day(random, week) { name = "Saturday"});
+            week.Add(new Day(random, week) { name = "Sunday"});
         }
         private void AddFirstPlayerStore() 
         {
@@ -223,7 +223,7 @@ namespace LemonadeStand_3DayStarter
         }
         private void addARecipeTotheBook() 
         {
-            player.myReceipeBook.Add(new Recipe());
+            player.myReceipeBook.Add(new Recipe{ pricePerCup = 5.00});// hardcoded for now;
         }
         private void EditARecipeInBook(int indexOfRecipeToEdit, int indexOfFranchiseWhereRecipeWillBe)
         {
@@ -324,7 +324,11 @@ namespace LemonadeStand_3DayStarter
         {
             foreach (Customer customer in week[currentDay].dailyCustomers) 
             {
-                if (customer.SpendingPower > 30000)
+                foreach (Customer customer1 in week[currentDay].dailyCustomers) 
+                {
+                    customer1.SetProbabilityOfSpending(week[currentDay].weather.temperature, player.myReceipeBook[0]); // will hardcode for now
+                }
+                if (customer.ProbabilityOfPurchase > .60)
                 {
                     Console.WriteLine($"{customer.name} purchased from you");
                     player.wallet.AddFromTodaysEarnings(5.00);

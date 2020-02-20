@@ -27,8 +27,12 @@ namespace LemonadeStand_3DayStarter
 
         public double AffinityToCoolingFactor { get { return affinityToCoolingFactor; } }
         private double affinityToCoolingFactor;
-        public Customer(Random random)
+        private List<Day> week;
+        private Random rando;
+        public Customer(Random random, List<Day> week)
         {
+            rando = random;
+            this.week = week;
             names = new List<string>();
             AddNames();
             SetAName(random);
@@ -77,7 +81,7 @@ namespace LemonadeStand_3DayStarter
         private void SetAffinityToAcridity(Random random) { }
         private void SetAffinityToAequousLevels(Random random) { }
         private void SetAffinityToCoolingFactor(Random random, Day dayIamSpawnedIn) { }
-        private void SetProbabilityOfSpending(Recipe RecepieCustomerInteractsWith) 
+        public void SetProbabilityOfSpending(int temperature, Recipe RecipeIInteactWith) 
         {
             //Here is where we should manipulate chances of spend with regards to
             //78k -4.39%(3424.2) on food away from home, lets assume our visits are slightly lower than that of Starbucks
@@ -93,6 +97,20 @@ namespace LemonadeStand_3DayStarter
             // OUR RECIPE SHOULD HAVE A MODEL THAT EASURES COOLING FACTOR BASED ON ICE ADDED
             //OUR RECIPE SHOULD HAVE A MODEL THAT MEASURES WATER DILLUTION WHEN WATER SUGAR AND LEMONS ARE ADDED
             //Our Recipe will asume ice-melt is negligeable because we are keeping our lemonade in a cooler somewhere.
+
+            if (RecipeIInteactWith.pricePerCup < .00025 * spendingPower)
+            {
+                if ((temperature > 80))
+                {
+                    int prob = rando.Next(50, 100);
+                    probabilityOfPurchase = prob;
+                }
+            }
+            else 
+            {
+                probabilityOfPurchase = 0;
+            }
+            
         }
     }
 }

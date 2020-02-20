@@ -12,8 +12,10 @@ namespace LemonadeStand_3DayStarter
         public List<Customer> dailyCustomers; //Formally customers
         public string name;
         public int ID;
-        public Day(Random random)
+        private List<Day> week;
+        public Day(Random random, List<Day> week)
         {
+            this.week = week;
             weather = new Weather(random);
             dailyCustomers = new List<Customer>();
             addDailyCustomers(random);
@@ -28,7 +30,7 @@ namespace LemonadeStand_3DayStarter
                 chanceOfCustomerSpawn = random.Next(10, 20);
                 for (int i = 0; i <chanceOfCustomerSpawn ; i++)
                 {
-                    dailyCustomers.Add(new Customer(random));
+                    dailyCustomers.Add(new Customer(random, week));
                 }
             }
             else if ((weather.temperature > 79) && (weather.temperature < 90))
@@ -36,7 +38,7 @@ namespace LemonadeStand_3DayStarter
                 chanceOfCustomerSpawn = random.Next(15, 30);
                 for (int i = 0; i < chanceOfCustomerSpawn; i++)
                 {
-                    dailyCustomers.Add(new Customer(random));
+                    dailyCustomers.Add(new Customer(random, this.week));
                 }
             }
             else if ((weather.temperature > 89))
@@ -44,7 +46,7 @@ namespace LemonadeStand_3DayStarter
                 chanceOfCustomerSpawn = random.Next(25, 40);
                 for (int i = 0; i < chanceOfCustomerSpawn; i++)
                 {
-                    dailyCustomers.Add(new Customer(random));
+                    dailyCustomers.Add(new Customer(random, this.week));
                 }
             }
             else if ((weather.temperature > 10) && (weather.temperature < 61))
@@ -52,7 +54,7 @@ namespace LemonadeStand_3DayStarter
                 chanceOfCustomerSpawn = random.Next(2, 10);
                 for (int i = 0; i < chanceOfCustomerSpawn; i++)
                 {
-                    dailyCustomers.Add(new Customer(random));
+                    dailyCustomers.Add(new Customer(random, this.week));
                 }
             }
             else if (weather.temperature < 11)
@@ -60,7 +62,7 @@ namespace LemonadeStand_3DayStarter
                 chanceOfCustomerSpawn = random.Next(0, 2);
                 for (int i = 0; i < chanceOfCustomerSpawn; i++)
                 {
-                    dailyCustomers.Add(new Customer(random));
+                    dailyCustomers.Add(new Customer(random, this.week));
                 }
             }
         }
